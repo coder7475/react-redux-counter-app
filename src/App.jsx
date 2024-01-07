@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import './App.css'
+import { incrementCounter, resetCounter, decrementCounter } from './redux/actions/counterActions';
 
 
 function App() {
-  const [count, setCount] = useState(0);
-  
+  const count = useSelector(state => state.count);
+  const dispatch = useDispatch();
+
   return (
     <>
       <h1>Learn React-Redux</h1>
@@ -14,13 +16,13 @@ function App() {
           count is {count}
         </p>
 
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={() => dispatch(incrementCounter())}>
           Increase
         </button>
-        <button onClick={() => setCount((count) => count - 1)}>
+        <button onClick={() => dispatch(decrementCounter())}>
           Decrease
         </button>
-        <button onClick={() => setCount(0)}>
+        <button onClick={() => dispatch(resetCounter())}>
           Reset
         </button>
       </div>
